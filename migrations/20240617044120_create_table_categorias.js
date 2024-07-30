@@ -3,14 +3,13 @@
  * @returns { Promise<void> }
  */
 exports.up = function(knex) {
-  return knex.schema.createTable('categorias', table => {
+  return knex.schema.createTable('categorias', function(table) {
       table.increments('id').primary();
-      table.string('name').notNullable();
-      table.string('description'); // Campo adicional para la descripción
-      table.string('status').notNullable(); // Campo adicional para el estado
-      table.integer('created_by').notNullable(); // Campo adicional para el ID del creador
-      table.integer('updated_by').notNullable(); // Campo adicional para el ID del último actualizador
-      table.timestamps(true, true); // Campos para created_at y updated_at
+      table.string('nombre').notNullable();
+      table.string('descripcion');
+      table.string('imagen_url'); // Campo para la URL de la imagen
+      table.timestamp('creado_en').defaultTo(knex.fn.now()).notNullable();
+      table.timestamp('actualizado_en').defaultTo(knex.fn.now()).notNullable();
   });
 };
 

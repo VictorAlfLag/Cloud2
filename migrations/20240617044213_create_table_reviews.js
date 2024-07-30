@@ -1,24 +1,20 @@
 /**
- * @param { import("knex"). Knex } knex
+ * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
 exports.up = function(knex) {
-  return knex.schema.createTable('reviews', table => {
+  return knex.schema.createTable('reviews', function(table) {
       table.increments('id').primary();
-      table.integer('rating').notNullable(); // Calificación de la reseña
-      table.string('comment').notNullable(); // Comentario de la reseña
-      table.integer('user_id').notNullable(); // ID del usuario que realizó la reseña
-      table.integer('product_id').notNullable(); // ID del producto relacionado
-      table.integer('created_by').notNullable(); // ID del creador de la reseña
-      table.integer('updated_by').notNullable(); // ID del último actualizador de la reseña
-      table.string('status').notNullable(); // Estado de la reseña
-      table.text('response'); // Respuesta del administrador a la reseña
-      table.timestamps(true, true); // Campos para created_at y updated_at
+      table.integer('rating').notNullable();
+      table.string('comentario').notNullable();
+      table.string('foto_url'); // Campo para la URL de la foto
+      table.timestamp('creado_en').defaultTo(knex.fn.now()).notNullable();
+      table.timestamp('actualizado_en').defaultTo(knex.fn.now()).notNullable();
   });
 };
 
 /**
-* @param { import("knex"). Knex } knex
+* @param { import("knex").Knex } knex
 * @returns { Promise<void> }
 */
 exports.down = function(knex) {

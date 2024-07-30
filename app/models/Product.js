@@ -1,27 +1,24 @@
-const { format } = require('mysql2');
 const { Model } = require('objection');
 
 class Product extends Model {
     static get tableName() {
-        return 'productos';
+        return 'product';
     }
 
     static get jsonSchema() {
         return {
             type: 'object',
-            required: ['name', 'price', 'description', 'category', 'stock', 'sku'], // Campos obligatorios
+            required: ['nombre', 'descripcion', 'precio', 'stock',],
 
             properties: {
                 id: { type: 'integer' },
-                name: { type: 'string', minLength: 1 },
-                price: { type: 'number' },
-                description: { type: 'string', minLength: 1 }, // Campo adicional
-                category: { type: 'string', minLength: 1 }, // Campo adicional
-                stock: { type: 'integer' }, // Campo adicional
-                sku: { type: 'string', minLength: 1 }, // Campo adicional
-                image_url: { type: 'string' }, // Campo adicional
-                created_at: { type: 'string', format: 'date-time' }, // Campo adicional
-                updated_at: { type: 'string', format: 'date-time' } // Campo adicional
+                nombre: { type: 'string', minLength: 1 },
+                descripcion: { type: 'string', minLength: 1 },
+                precio: { type: 'number' },
+                stock: { type: 'integer' },,
+                imagen_url: { type: 'string' },
+                creado_en: { type: 'string', format: 'date-time' },
+                actualizado_en: { type: 'string', format: 'date-time' },
             }
         };
     }
@@ -44,3 +41,4 @@ class Product extends Model {
 }
 
 module.exports = Product;
+

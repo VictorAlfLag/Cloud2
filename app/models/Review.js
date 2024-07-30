@@ -1,6 +1,6 @@
 const { Model } = require('objection');
 
-class Review extends Model {
+class Reviews extends Model {
     static get tableName() {
         return 'reviews';
     }
@@ -8,38 +8,34 @@ class Review extends Model {
     static get jsonSchema() {
         return {
             type: 'object',
-            required: ['rating', 'comment', 'user_id', 'product_id', 'created_by', 'status'],
+            required: ['rating', 'comentario'],
+
             properties: {
                 id: { type: 'integer' },
                 rating: { type: 'integer' },
-                comment: { type: 'string', minLength: 1 },
-                user_id: { type: 'integer' }, // ID del usuario que realizó la reseña
-                product_id: { type: 'integer' }, // ID del producto relacionado
-                created_by: { type: 'integer' }, // ID del creador de la reseña
-                updated_by: { type: 'integer' }, // ID del último actualizador
-                status: { type: 'string' }, // Estado de la reseña
-                response: { type: 'string' }, // Respuesta del administrador a la reseña
-                created_at: { type: 'string', format: 'date-time' },
-                updated_at: { type: 'string', format: 'date-time' }
+                comentario: { type: 'string', minLength: 1 },
+                foto_url: { type: 'string' },
+                creado_en: { type: 'string', format: 'date-time' },
+                actualizado_en: { type: 'string', format: 'date-time' },
             }
         };
     }
 
     static async getReviews() {
-        return await Review.query();
+        return await Reviews.query();
     }
 
     static async insert(data) {
-        return await Review.query().insert(data);
+        return await Reviews.query().insert(data);
     }
 
     static async update(data, id) {
-        return await Review.query().patchAndFetchById(id, data);
+        return await Reviews.query().patchAndFetchById(id, data);
     }
 
     static async delete(id) {
-        return await Review.query().deleteById(id);
+        return await Reviews.query().deleteById(id);
     }
 }
 
-module.exports = Review;
+module.exports = Reviews;
